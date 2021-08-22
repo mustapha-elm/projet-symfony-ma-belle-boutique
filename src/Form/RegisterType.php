@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,15 +36,13 @@ class RegisterType extends AbstractType
                     'placeholder' => 'Saisir votre email'
                 ]
             ])
-            ->add('password', PasswordType::class, [
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Le mot de passe et la confirmation doivent être identique',
                 'label' => 'Mot de passe',
-                'attr' => [
-                    'placeholder' => 'Saisir votre mot de passe'
-                ]
-            ])
-            ->add('password_confirm', PasswordType::class, [
-                'label' => 'Confirmez mot de passe',
-                'mapped' => false
+                'required' => true,
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmez votre mot de passe']
             ])
 
             ->add('submit', SubmitType::class, [
