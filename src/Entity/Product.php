@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
+use App\Entity\Category;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -48,7 +49,7 @@ class Product
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -130,12 +131,12 @@ class Product
         return $this;
     }
 
-    public function getCategory(): ?category
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?category $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
