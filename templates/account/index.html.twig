@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte - Ma Belle Boutique{% endblock %}
+{% block title %}Mon compte - Ma Belle Boutique
+{% endblock %}
 
 {% block content %}
-    <h1>Mon compte</h1>
-    Bienvenue {{ app.user.lastname}} dans votre compte personnel.
-     <hr>
-     <a href="{{ path('account_password') }}">Modifier mon mot de passe</a>
+	<h1>Mon compte</h1>
+	Bienvenue
+	{{ app.user.lastname}}
+	dans votre compte personnel.
+	<hr>
+	<a href="{{ path('account_password') }}">Modifier mon mot de passe</a>
+	<br>
+	<a href="{{ path('account_address') }}">Gérer mes adresses</a>
 {% endblock %}
