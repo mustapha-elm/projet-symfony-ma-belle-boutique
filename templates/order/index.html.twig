@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Valider ma commande - La Boutique Française
+{% block title %}Valider ma commande - Ma Belle Boutique
 {% endblock %}
 
 {% block content %}
@@ -10,14 +10,19 @@
 	<hr>
 	<div class="row">
 		<div class="col-md-6">
-			<b>Choisir mon adresse de livraison</b><br>
-			<b>Choisir mon transporteur</b>
+			{% set formHtml %}
+			{{ form(form) }}
+				{% endset %}
+
+				{{ formHtml|replace({'[br]' : '<br/>'})|raw }}
+
+				<b>Choisir mon transporteur</b>
+			</div>
+
+			<div class="col-md-6">
+				<b>récap de ma commande</b><br>
+				<b>Bouton pour payer</b>
+			</div>
 		</div>
 
-		<div class="col-md-6">
-			<b>récap de ma commande</b><br>
-			<b>Bouton pour payer</b>
-		</div>
-	</div>
-
-{% endblock %}
+	{% endblock %}
