@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement de ma commande - Ma Belle Boutique
+{% endblock %}
+
+{% block content %}
+	<h2>Mon récapitulatif</h2>
+
+	<p>Vérifier vos informations de commande avant paiement</p>
+	<hr>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-check mt-5">
+				<strong>Mon adresse de livraison</strong>
+				<br/>
+				{{ delivery|raw }}
+			</div>
+
+
+			<div class="form-check">
+				<strong>Mon transporteur :</strong>
+				<br>
+				{{ carrier.name }}
+				<br>
+				{{ carrier.description }}
+				<br>
+				{{ carrier.price|number_format(2, ',', '.') }}
+				€
+			</div>
+
+
+		</div>
+
+		<div class="col-md-6">
+			<div class="text-center">
+				<b>Ma commande</b>
+
+			</div>
+
+			<div class='order-summary'>
+				{% set total = null %}
+				{% for product in cart %}
+					<div class="row">
+						<div class="col-2">
+							<img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px">
+						</div>
+						<div class="col-7 my-auto">
+							{{ product.product.name }}
+							<br>
+							<small>{{ product.product.subtitle }}
+								<br>
+								x
+								{{ product.quantity }}
+							</small>
+						</div>
+						<div class="col-3 my-auto">
+							{{ ((product.product.price * product.quantity) /100)|number_format(2, ',', '.') }}
+							€
+						</div>
+					</div>
+					{% set total = total + (product.product.price * product.quantity) %}
+				{% endfor %}
+			</div>
+			<hr>
+			<strong>Sous-total :
+			</strong>
+			{{ (total /100)|number_format(2, ',', '.') }}
+			€
+			<br>
+			<strong>livraison :
+			</strong>
+			{{ (carrier.price)|number_format(2, ',', '.') }}
+			€
+			<hr>
+			<strong>Total :
+			</strong>
+			{{ ((total /100) + (carrier.price))|number_format(2, ',', '.') }}
+			€
+
+			<a href="" class="btn btn-success btn-block mt-3">Payer |
+				{{ ((total /100) + (carrier.price))|number_format(2, ',', '.') }}
+				€
+			</a>
+		</div>
+	</div>
+
+{% endblock %}
