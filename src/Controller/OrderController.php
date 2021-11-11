@@ -76,6 +76,8 @@ class OrderController extends AbstractController
 
             //enregistrer ma commande order()
             $order = new Order();
+            $reference = $date->format('dmY') . '-' . uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
             $order->setCarrierName($carriers->getName());
@@ -85,8 +87,9 @@ class OrderController extends AbstractController
 
             $this->entityManager->persist($order);
 
-            //enregistrer mes produits erderDetails()
 
+
+            //enregistrer mes produits OrderDetails()
             foreach ($cart->getFull() as $product) {
                 $orderDetails = new OrderDetails();
                 $orderDetails->setMyOrder($order);
@@ -97,12 +100,16 @@ class OrderController extends AbstractController
                 $this->entityManager->persist($orderDetails);
             }
 
+            //dd($order);
+
+            //commenter le flush pour ne pas enristrer en bd les cmd pendant les tests
             $this->entityManager->flush();
 
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getFull(),
                 'carrier' => $carriers,
-                'delivery' => $delivery_content
+                'delivery' => $delivery_content,
+                'reference' => $order->getReference()
             ]);
         }
 

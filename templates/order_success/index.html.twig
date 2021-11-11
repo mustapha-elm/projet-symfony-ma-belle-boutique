@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de commande - Ma Belle Boutique
+{% endblock %}
+
+{% block content %}
+	<h2>Confirmation de commande</h2>
+	<p>
+		Bonjour
+		<strong>{{ order.user.lastname }}</strong>, nous vous remercions pour votre
+		<strong>commande n°
+			{{ order.reference }}</strong>
+		<br>
+		Une confirmation vient de vous être envoyée à
+		<strong>{{ order.user.email }}</strong>.
+		<hr>
+
+		Votre commande sera livrée par
+		{{ order.carrierName }}
+		à l'adresse suivante :
+		<br>
+		<i>{{ order.delivery|raw }}</i>
+		<hr>
+		Pour suivre votre commande, rendez-vous dans votre
+		<a href="{{ path('account_order') }}">compte</a>.
+	</p>
+
+{% endblock %}

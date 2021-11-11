@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur de paiement - Ma Belle Boutique
+{% endblock %}
+
+{% block content %}
+	<h2>Erreur de paiement</h2>
+	<p>
+		Bonjour
+		<strong>{{ order.user.lastname }}</strong>, une erreur de paiement est survenue pour votre
+		<strong>commande n°
+			{{ order.reference }}</strong>
+		<br>
+		Un email vient de vous être envoyée à
+		<strong>{{ order.user.email }}</strong>.
+		<hr>
+	</p>
+	<a href="{{ path('order') }}" class="btn btn-success">Réessayer le paiement</a>
+
+{% endblock %}
