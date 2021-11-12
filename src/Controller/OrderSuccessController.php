@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Classe\Mail;
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +39,12 @@ class OrderSuccessController extends AbstractController
             $this->entityManager->flush();
 
             //Envoyer un mail au client pour lui confirmer sa commande
+            $mail = new Mail();
+            $to_email = $order->getUser()->getEmail();
+            $to_name = $order->getUser()->getFirstName() . ' ' . $order->getUser()->getLastName();
+            $subject = 'Votre commande Ma Belle Boutique est validée';
+            $content = 'Bonjour ' . $order->getUser()->getFirstName() . ', merci pour votre commande <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quos alias, quae, temporibus odit, eligendi aspernatur at labore doloremque provident recusandae cupiditate architecto atque porro vitae cum qui consectetur quisquam?';
+            $mail->send($to_email, $to_name, $subject, $content);
         }
 
 
