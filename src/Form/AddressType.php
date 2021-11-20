@@ -61,8 +61,10 @@ class AddressType extends AbstractType
             ])
             ->add('country', CountryType::class, [
                 'label' => 'Pays ',
+                'preferred_choices' => ['FR'],
                 'attr' => [
-                    'placeholder' => 'Votre pays'
+                    'placeholder' => 'Votre pays',
+                    'class' => 'form-control'
                 ]
             ])
             ->add('phone', TelType::class, [

@@ -8,14 +8,45 @@
 	Bienvenue
 	{{ app.user.lastname}}
 	dans votre compte personnel.
-	<hr>
+	<br>
 	{% if is_granted('ROLE_ADMIN') %}
-		<a href="{{ path('admin') }}">Vous êtes administrateur, accéder au Backoffice</a>
+		<small>
+			<a href="{{ path('admin') }}">Vous êtes administrateur, accéder au Backoffice</a>
+		</small>
 		<br>
 	{% endif %}
-	<a href="{{ path('account_password') }}">Modifier mon mot de passe</a>
-	<br>
-	<a href="{{ path('account_address') }}">Gérer mes adresses</a>
-	<br>
-	<a href="{{ path('account_order') }}">Mes commandes</a>
+
+	<hr>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="account-item text-center">
+
+				<a href="{{ path('account_password') }}">
+					<img src="{{ asset('assets/img/password.png') }}" alt="mot de passe">
+					<br>Modifier mot de passe
+				</a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="account-item text-center">
+
+				<a href="{{ path('account_address') }}">
+					<img src="{{ asset('assets/img/adress-book.png') }}" alt="mes adresses">
+					<br>Gérer mes adresses
+				</a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="account-item text-center">
+
+				<a href="{{ path('account_order') }}">
+					<img src="{{ asset('assets/img/package.png') }}" alt="Mes commandes">
+					<br>Mes commandes
+				</a>
+			</div>
+		</div>
+	</div>
+
+
 {% endblock %}

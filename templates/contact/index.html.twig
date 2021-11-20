@@ -1,10 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nous contacter - Ma Belle Boutique
+{% block title %}
+	Nous contacter - Ma Belle Boutique
+
+
 {% endblock %}
 
 {% block content %}
 
-	<h1>formulaire de contact</h1>
+	<h1>
+		Contacter notre équipe
+	</h1>
 
-{% endblock %}
+	{% for message in app.flashes('notice') %}
+		<div class="alert alert-info text-center">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<div class="row mt-4">
+		<div class="col-md-8">
+			{{ form(form) }}
+			</div>
+			<div class="col-md-4">
+				<strong>Ma Belle Boutique</strong>
+				<hr>
+				0320000000
+				<br>
+				8, rue des Lilas, 59000 Lille
+						contact@mabelleboutique.fr
+				<br>
+			</div>
+		</div>
+
+	{% endblock %}
